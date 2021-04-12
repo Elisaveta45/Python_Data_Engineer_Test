@@ -1,15 +1,16 @@
-SELECT Employee.name, Employee.id, Department.id
+SELECT Employee.name
 FROM Employee
 LEFT JOIN Department ON Employee.department_id = Department.id
 WHERE Departmen.id is NULL
-
-SELECT Department.name, Employee.id, Department.id
+UNION
+SELECT Department.name
 FROM Employee
 RIGHT JOIN Department ON Employee.department_id = Department.id
 WHERE Employee.department_id is NULL
 
-SELECT Department.name, Employee.id, Department.id, COUNT(Employee.id)
+SELECT Department.name, COUNT(*)
 FROM Employee
-RIGHT JOIN Department ON Employee.department_id = Department.id
-GROUP BY(Department.id)
-HAVING COUNT(Employee.id) < 3;
+LEFT JOIN Department
+ON Employee.department_id = Department.id
+GROUP BY(Department.name)
+HAVING COUNT(*) < 3;
